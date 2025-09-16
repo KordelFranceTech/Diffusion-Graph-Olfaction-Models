@@ -1,35 +1,25 @@
 ---
-license: mit
-task_categories:
-- image-classification
-- image-to-text
-- robotics
-language:
-- en
+language: 
+  - en
 tags:
-- chemistry
-- biology
-- robotics
+- embeddings
+- multimodal
+- olfaction-vision-language
 - olfaction
 - olfactory
-- smell
-- scent
-- odor
-- odour
-pretty_name: Olfaction-Vision-Language Dataset
-size_categories:
-- 10K<n<100K
-annotations_creators:
-- expert-generated
-- machine-generated
-language_creators:
-- expert-created
-source_datasets:
-- GoodScents
-- LeffingWell
-- COCO
+- scentience
+- vision-language
+- vision
+- language
+- robotics
+license: mit
+datasets:
+- kordelfrance/olfaction-vision-language-dataset
+- detection-datasets/coco
+base_model: Scentience-OVL-Embeddings-Base
 ---
-Diffusion-Graph Neural Networks for Olfaction-Vision and Olfaction-Vision-Language Learning
+
+Diffusion Graph Neural Networks for Robust Olfactory Navigation in Robotics
 ----
 
 <div align="center">
@@ -49,15 +39,50 @@ An open-sourced diffusion-based graph neural network for olfaction-vision-langua
 
 ---
 
-## Dataset Description
+## Model Description
 
-- **Modalities**: Olfaction, Vision, Language
+Navigation by scent is a capability in robotic systems that is rising in demand. 
+However, current methods often suffer from ambiguities, particularly when robots misattribute odours to incorrect objects due to limitations in olfactory datasets and sensor resolutions. 
+To address challenges in olfactory navigation, we introduce a novel machine learning method using diffusion-based molecular gen-
+eration that can be used by itself or with automated olfactory
+dataset construction pipelines. This generative process of our diffusion model expands the chemical space beyond the limitations
+of both current olfactory datasets and training methods, enabling
+the identification of potential odourant molecules not previously
+documented. The generated molecules can then be more accurately validated using advanced olfactory sensors, enabling
+them to detect more compounds and inform better hardware
+design. By integrating visual analysis, language processing, and
+molecular generation, our framework enhances the ability of
+olfaction-vision models on robots to accurately associate odours
+with their correct sources, thereby improving navigation and
+decision-making through better sensor selection for a target
+compound in critical applications such as explosives detection,
+narcotics screening, and search and rescue. Our methodology
+represents a foundational advancement in the field of artificial
+olfaction, offering a scalable solution to challenges posed by
+limited olfactory data and sensor ambiguities.
 
-- **Data Format**:
-  All sensor streams are synchronized and stored in a standardized JSON / NoSQL format.
+For the full training set, please see the fully open-source dataset [here on HuggingFace](https://huggingface.co/datasets/kordelfrance/olfaction-vision-language-dataset).
 
-- **Total Samples**: _~5,000_
-- **Environments**: Indoor, outdoor, lab-controlled, and natural settings
+---
+
+## Models
+We offer two models with this repository:
+ - (1) `constrained`: A diffusion model with its associated olfactory conditioner that is constrained to only generate molecules based on the atoms `C`, `N`, `O`, `F`, `P`, `S`, and `Cl`.
+ - (2) `unconstrained`: A diffusion model with its associated olfactory conditioner that is unconstrained and may generate molecules from any atom.
+
+
+## Directory Structure
+
+```text
+DiffusionGraphOlfactionModels/
+├── data/                     # Example dataset
+├── src/                      # Model training and inferenct tools
+├── notebooks/                # Colab-ready notebooks
+├── models/                   # Pre-trained models for immediate use
+├── requirements.txt          # Python dependencies
+├── LICENSE                   # Licensing terms of this repository
+└── README.md                 # Overview of repository contributions and usage
+```
 
 ---
 
@@ -86,25 +111,14 @@ source env/bin/activate  # On Windows: .\env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-#### 4. Run Sample Data Generation Notebook
-
+#### 4. Run Inference or Train Models
+Run inference:
+```bash
+python scripts/main.py
+```
+Train Models:
 ```bash
 jupyter notebook notebooks/Olfaction_Diffusion-Train.ipynb
-```
-
----
-
-## Directory Structure
-
-```text
-MultimodalDataset/
-├── data/                     # Example dataset
-├── scripts/                  # Model training and inferenct tools
-├── notebooks/                # Colab-ready notebooks
-├── models/                   # Pre-trained models for immediate use
-├── requirements.txt          # Python dependencies
-├── LICENSE                   # Licensing terms of this repository
-└── README.md                 # Overview of repository contributions and usage
 ```
 
 ---
