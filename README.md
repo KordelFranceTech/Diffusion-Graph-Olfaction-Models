@@ -16,7 +16,7 @@ license: mit
 datasets:
 - kordelfrance/olfaction-vision-language-dataset
 - detection-datasets/coco
-base_model: Scentience-OVL-Embeddings-Base
+base_model: DEGNN-Unconstrained
 ---
 
 Diffusion Graph Neural Networks for Robust Olfactory Navigation in Robotics
@@ -35,7 +35,7 @@ Diffusion Graph Neural Networks for Robust Olfactory Navigation in Robotics
 </div>
 
 
-An open-sourced diffusion-based graph neural network for olfaction-vision-language tasks.
+An open-sourced diffusion-based equivariant graph neural network (DEGNN) for olfaction-vision-language tasks.
 
 ---
 
@@ -45,7 +45,9 @@ Navigation by scent is a capability in robotic systems that is rising in demand.
 However, current methods often suffer from ambiguities, particularly when robots misattribute odours to incorrect objects due to limitations in olfactory datasets and sensor resolutions. 
 To address challenges in olfactory navigation, we introduce a novel machine learning method using diffusion-based molecular gen-
 eration that can be used by itself or with automated olfactory
-dataset construction pipelines. This generative process of our diffusion model expands the chemical space beyond the limitations
+dataset construction pipelines. 
+Our models, diffusion-based equivariant graph neural networks (`DEGNN` for short), leverage the state of the art in molecular generation and aroma mapping.
+This generative process of our diffusion model expands the chemical space beyond the limitations
 of both current olfactory datasets and training methods, enabling
 the identification of potential odourant molecules not previously
 documented. The generated molecules can then be more accurately validated using advanced olfactory sensors, enabling
@@ -61,15 +63,54 @@ represents a foundational advancement in the field of artificial
 olfaction, offering a scalable solution to challenges posed by
 limited olfactory data and sensor ambiguities.
 
-For the full training set, please see the fully open-source dataset [here on HuggingFace](https://huggingface.co/datasets/kordelfrance/olfaction-vision-language-dataset).
-
----
-
-## Models
 We offer two models with this repository:
  - (1) `constrained`: A diffusion model with its associated olfactory conditioner that is constrained to only generate molecules based on the atoms `C`, `N`, `O`, `F`, `P`, `S`, and `Cl`.
  - (2) `unconstrained`: A diffusion model with its associated olfactory conditioner that is unconstrained and may generate molecules from any atom.
 
+---
+
+## Model Details
+- **Model Name:** `DEGNN Constrained`
+- **Developed by:** Kordel K. France
+- **Date:** September 2025
+- **Architecture:**
+  - **Olfaction conditioner:** Feedforward Neural Network
+  - **Diffusion model:** Equivariant Graph Neural Network conditioned on atoms C, N, O, F, P, S, Cl
+- **License:** MIT
+- **Contact:** kordel@scentience.ai, kordel.france@utdallas.edu
+
+---
+
+
+- **Model Name:** `DEGNN Unonstrained`
+- **Developed by:** Kordel K. France
+- **Date:** September 2025
+- **Architecture:**
+  - **Olfaction conditioner:** Feedforward Neural Network
+  - **Diffusion model:** Equivariant Graph Neural Network conditioned on all available atoms in training data
+- **License:** MIT
+- **Contact:** kordel@scentience.ai, kordel.france@utdallas.edu
+
+---
+
+## Intended Use
+- **Primary purpose:** Research in multimodal machine learning involving olfaction, vision, and language.  
+- **Example applications:**
+  - Robotics and UAV navigation guided by chemical cues
+  - Chemical dataset exploration and visualization
+- **Intended users:** Researchers, developers, and educators working in ML, robotics, chemistry, and HCI.
+- **Out of scope:** Not intended for safety-critical tasks (e.g., gas leak detection, medical diagnosis, or regulatory use).
+
+---
+
+## Training Data
+- **Olfaction data:** Language-aligned olfactory data curated from GoodScents and LeffingWell datasets.
+- **Vision data:** COCO dataset.
+- **Language data:** Smell descriptors and text annotations curated from literature.
+
+For more information on how the training data was accumulated, please see the [HuggingFace dataset URL here](https://huggingface.co/datasets/kordelfrance/olfaction-vision-language-dataset)
+
+---
 
 ## Directory Structure
 
