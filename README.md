@@ -7,7 +7,11 @@ tags:
 - olfaction-vision-language
 - olfaction
 - olfactory
-- scentience
+- diffusion
+- neural-network
+- graph-neural-network
+- gnn
+- molecule
 - vision-language
 - vision
 - language
@@ -64,8 +68,8 @@ olfaction, offering a scalable solution to challenges posed by
 limited olfactory data and sensor ambiguities.
 
 We offer two models with this repository:
- - (1) `constrained`: A diffusion model with its associated olfactory conditioner that is constrained to only generate molecules based on the atoms `C`, `N`, `O`, `F`, `P`, `S`, and `Cl`.
- - (2) `unconstrained`: A diffusion model with its associated olfactory conditioner that is unconstrained and may generate molecules from any atom.
+ - (1) `DEGNN-constrained`: A diffusion model with its associated olfactory conditioner that is constrained to only generate molecules based on the atoms `C`, `N`, `O`, `F`, `P`, `S`, and `Cl`.
+ - (2) `DEGNN-unconstrained`: A diffusion model with its associated olfactory conditioner that is unconstrained and may generate molecules from any atom.
 
 ---
 
